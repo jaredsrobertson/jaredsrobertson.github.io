@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jared Robertson</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,600;1,800;1,900&family=Poppins:wght@200;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="wrapper">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">home</a></li>
+                    <li><a href="#">skills</a></li>
+                    <li><a href="#">edu/exp</a></li>
+                    <li><a href="#">projects</a></li>
+                    <li><a href="#">contact</a></li>
+                </ul>
+            </nav>
+            <img class="lb" id="lb" src="idea.png" onclick="lightMode(); lightsOn(); hsLightsOn();">
+            <script src="myScript.js"></script>
+        </header>
+
+        <main>
+            <div class="left-col">
+                <span class="intro">Hi, I'm</span><h1 onmouseover="h1Hover()" onmouseout="h1Hover()">Jared Robertson</h1>
+                <p class="info"><strong>IT Professional</strong> with a wide skillset and a background in<span class="snc-italics">Sales & Customer Service.</span></p>
+                <a href="#" class="skill-link">See my skills.</a>
+            </div>
+            <div class="right-col">
+                <div class="headshot"><img id="headshot" src="headshotcolor.png" alt="headshot"></div>
+            </div>
+        </main>
+
+    </div>
+
+</body>
+</html>
