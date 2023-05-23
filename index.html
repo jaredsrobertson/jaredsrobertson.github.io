@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,600;1,800;1,900&family=Poppins:wght@200;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="light-mode">
 
     <div class="wrapper">
         <header>
@@ -22,19 +22,20 @@
                     <li><a href="#">projects</a></li>
                     <li><a href="#">contact</a></li>
                 </ul>
+                <img class="light-switch light-mode" src="idea.png" onclick="lightMode()">
             </nav>
-            <img class="lb" id="lb" src="idea.png" onclick="lightMode(); lightsOn(); hsLightsOn();">
+            
             <script src="myScript.js"></script>
         </header>
 
         <main>
             <div class="left-col">
-                <span class="intro">Hi, I'm</span><h1 onmouseover="h1Hover()" onmouseout="h1Hover()">Jared Robertson</h1>
-                <p class="info"><strong>IT Professional</strong> with a wide skillset and a background in<span class="snc-italics">Sales & Customer Service.</span></p>
+                <span class="intro">Hi, I'm</span><h1 class="float" onmouseover="h1Hover()" onmouseout="h1Hover()">Jared Robertson</h1>
+                <p class="info"><strong>IT Professional</strong> with a wide skillset and a background in<span class="sales-italic">Sales & Customer Service.</span></p>
                 <a href="#" class="skill-link">See my skills.</a>
             </div>
             <div class="right-col">
-                <div class="headshot"><img id="headshot" src="headshotcolor.png" alt="headshot"></div>
+                <div class="photo-div"><img class="photo light-mode" src="headshotcolor.png" alt="A photograph of Jared Robertson."></div>
             </div>
         </main>
 

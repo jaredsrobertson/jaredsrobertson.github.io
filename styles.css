@@ -1,26 +1,41 @@
 
+/* HTML, body, and wrapper */
+
+
 html {
     font-size: 62.5%;
 }
 
 body {
     margin: 0;
+    padding: 0;
     font-family: 'Poppins';
     background-color: black;
     color: white;
     transition: 0.5s;
+    animation-name: opacity;
+    animation-duration: 2s;
 }
 
-body.light {
+@keyframes opacity {
+    0%{opacity: 0;}
+    100%{opacity: 1;}
+}
+
+body.light-dark {
     background-color: white;
     color: black;
     transition: 0.5s;
 }
 
 .wrapper {
-    max-width: 1200px;
+    max-width: 80vw;
     margin: 0 auto;
 }
+
+
+/* header, nav, light mode toggle. "top of page," would like to use for each page */
+
 
 header {
     overflow: hidden;
@@ -29,23 +44,33 @@ header {
     align-items: center;
 }
 
-.lb {
+.light-switch {
     width: 2.5%;
-    height: 100%;
+    height: auto;
     position: absolute;
-    right: 0%;
-    object-fit: contain;
-    padding-right: 5%;
+    right: 5%;
+    transition: filter .5s ease-in-out;
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
+    -webkit-animation: swing 2s infinite ease-in-out;
+    animation: swing 7s infinite ease-in-out;
+    animation-delay: 3s;
 }
 
-img.lb:hover {
+@keyframes swing {
+    0%{transform: rotate(0deg);}
+    20%{transform: rotate(-10deg);}
+    40%{transform: rotate(10deg);}
+    60%{transform: rotate(0deg);}
+    100%{transform: rotate(0deg);}
+}
+
+.light-switch:hover {
     -webkit-filter: grayscale(0%);
     filter: grayscale(0%);
 }
 
-img.lb.lightson {
+.light-switch.light-dark {
     -webkit-filter: grayscale(0%);
     filter: grayscale(0%);
 }
@@ -71,18 +96,20 @@ nav ul li a {
     text-transform: uppercase;
     font-size: 1.6rem;
     position: relative;
-    float: left;
 }
 
 nav ul li a.active:before {
     position: absolute;
     content: "";
     width: 75%;
-    
     height: 1px;
     border-bottom: 2px solid;
     bottom: -5px;
 }
+
+
+/* "content" */
+
 
 main {
     display: flex;
@@ -90,8 +117,7 @@ main {
 }
 
 .left-col {
-    width: 55%;
-    float: left;
+    width: 65%;
 }
 
 .intro {
@@ -101,8 +127,9 @@ main {
     margin-left: 5%;
 }
 
+/* big pretty first last name */
+
 h1 {
-    
     font-size: 8rem;
     font-family: 'Playfair Display';
     font-weight: 900;
@@ -110,15 +137,17 @@ h1 {
     margin: 0 auto;
 }
 
-.snc-italics {
-    display: inline-block;
-    font-style: italic;
-    text-decoration: underline;
-}
+/* end big pretty name */
 
 .info {
     margin-left: 5%;
     font-size: 2rem;
+}
+
+.sales-italic {
+    display: block;
+    font-style: italic;
+    text-decoration: underline;
 }
 
 .skill-link {
@@ -130,19 +159,18 @@ h1 {
 }
 
 .right-col {
-    flex-grow: 1;
-    max-width: 45%;
+    width: 35%;
 }
 
-.headshot {
-    width: 75%;
-    float: right;
+.photo-div {
+    object-fit: contain;
+    
 }
 
-#headshot {
+.photo {
     object-fit: contain;
     height: auto;
-    width: 100%;
+    width: 95%;
     border: 10px solid;
     border-radius: 50%;
     background-color: white;
@@ -151,18 +179,20 @@ h1 {
     filter: grayscale(100%);
 }
 
-#headshot.hover {
+.photo.hover {
     -webkit-filter: grayscale(0%);
     filter: grayscale(0%);
 }
 
-#headshot.lights {
+.photo:hover {
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+}
+
+.photo.light-dark {
     background-color: black;
 }
 
-#headshot:hover {
-    -webkit-filter: grayscale(0%);
-    filter: grayscale(0%);
-}
+
 
 
