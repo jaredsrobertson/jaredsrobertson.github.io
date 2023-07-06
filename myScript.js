@@ -5,7 +5,3 @@ function lightMode() {
     }
 }
 
-function h1Hover() {
-    var image = document.getElementsByClassName("photo")[0];
-    image.classList.toggle("hover");
-}
