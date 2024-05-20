@@ -10,6 +10,7 @@
             padding: 0;
             width: 100%;
             height: 100%;
+            overflow: hidden; /* Prevent scrollbars */
             font-family: 'Courier New', Courier, monospace; /* Retro tech font */
         }
 
@@ -142,6 +143,16 @@
                 left: 20px;
             }
         }
+
+        #fairy {
+            display: none;
+            position: absolute;
+            width: 50px; /* Adjust size as needed */
+            height: 50px; /* Adjust size as needed */
+            pointer-events: none; /* Ensure it doesn't interfere with clicks */
+            transition: transform 1s ease-in-out, z-index 0s ease 1s;
+            z-index: 5;
+        }
     </style>
 </head>
 <body>
@@ -169,24 +180,160 @@
                 </pre>
             </div>
         </div>
+        <img id="fairy" src="fairy.png" alt="Fairy">
     </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             const textFileIcon = document.getElementById('textFileIcon');
             const notepadWindow = document.getElementById('notepadWindow');
             const closeBtn = document.querySelector('.close-btn');
-            
+            const fairy = document.getElementById('fairy');
+
+            let lastPosX = 0;
+            let isMirrored = false; // Track the current mirroring state
+
             textFileIcon.addEventListener('click', () => {
                 textFileIcon.style.animation = 'clickEffect 0.5s ease-in-out';
                 setTimeout(() => {
                     notepadWindow.style.display = 'block';
+                    setTimeout(() => {
+                        const notepadRect = notepadWindow.getBoundingClientRect();
+                        const centerX = notepadRect.left + notepadRect.width / 2;
+                        const centerY = notepadRect.top + notepadRect.height / 2;
+
+                        fairy.style.display = 'block';
+                        fairy.style.transition = 'transform 3s ease-in-out, opacity 3s ease-in-out';
+                        fairy.style.transform = `translate(${centerX - 50}px, ${centerY - 50}px) scale(2)`; // Twice as big
+                        fairy.style.opacity = 0;
+
+                        setTimeout(() => {
+                            fairy.style.opacity = 1;
+                            bobDuringFadeIn(centerX, centerY);
+                        }, 500); // Start fading in after 500ms
+                    }, 500); // Delay before showing the fairy
                 }, 500); // Match with the CSS animation duration
             });
 
             closeBtn.addEventListener('click', () => {
                 notepadWindow.style.display = 'none';
+                fairy.style.display = 'none';
+                clearInterval(trailInterval); // Clear the interval when the fairy is hidden
             });
+
+            function bobDuringFadeIn(centerX, centerY) {
+                let bobbing = true;
+
+                function bob() {
+                    if (!bobbing) return;
+                    fairy.style.transition = 'transform 1s ease-in-out, opacity 3s ease-in-out';
+                    fairy.style.transform = `translate(${centerX - 50}px, ${centerY - 60}px) scale(2)`;
+                    setTimeout(() => {
+                        if (!bobbing) return;
+                        fairy.style.transform = `translate(${centerX - 50}px, ${centerY - 40}px) scale(2)`;
+                        setTimeout(bob, 1000);
+                    }, 1000);
+                }
+
+                fairy.style.opacity = 1;
+                bob();
+
+                setTimeout(() => {
+                    bobbing = false;
+                    animateFairy();
+                }, 3000); // Bob in place for 3 seconds
+            }
+
+            let trailInterval;
+
+            function animateFairy() {
+                const fairyWidth = fairy.offsetWidth;
+                const fairyHeight = fairy.offsetHeight;
+
+                function moveFairy() {
+                    const maxX = window.innerWidth - fairyWidth;
+                    const maxY = window.innerHeight - fairyHeight;
+                    const minX = 0;
+                    const minY = 0;
+
+                    let posX = Math.random() * (maxX - minX) + minX;
+                    let posY = Math.random() * (maxY - minY) + minY;
+
+                    // Randomly adjust posX and posY to create curves and loops
+                    posX = Math.max(minX, Math.min(maxX, posX + Math.random() * 200 - 100));
+                    posY = Math.max(minY, Math.min(maxY, posY + Math.random() * 200 - 100));
+
+                    fairy.style.transition = 'transform 1s ease-in-out';
+                    fairy.style.transform = `translate(${posX}px, ${posY}px) ${isMirrored ? 'scaleX(-1) scale(2)' : 'scaleX(1) scale(2)'}`;
+
+                    // Random pause
+                    const pause = Math.random() * 1000 + 1000; // Pause between 1s to 2s
+                    setTimeout(() => {
+                        // Flip the fairy during the pause
+                        if (posX < lastPosX && !isMirrored) {
+                            isMirrored = true;
+                        } else if (posX >= lastPosX && isMirrored) {
+                            isMirrored = false;
+                        }
+                        lastPosX = posX;
+
+                        // Apply the mirroring state instantly
+                        fairy.style.transition = 'none'; // Remove transition for instant flip
+                        fairy.style.transform = `translate(${posX}px, ${posY}px) ${isMirrored ? 'scaleX(-1) scale(2)' : 'scaleX(1) scale(2)'}`;
+
+                        setTimeout(() => {
+                            fairy.style.transition = 'transform 1s ease-in-out'; // Restore transition for smooth movement
+                            moveFairy();
+                        }, 0); // Ensure the instant flip
+                    }, 4000 + pause); // Adjust the delay for smoother movement
+                }
+
+                function bobFairy() {
+                    fairy.style.transition = 'transform 1s ease-in-out';
+                    fairy.style.transform += ' translateY(10px)';
+                    setTimeout(() => {
+                        fairy.style.transform += ' translateY(-10px)';
+                        setTimeout(bobFairy, 1000);
+                    }, 1000);
+                }
+
+                moveFairy();
+                bobFairy();
+
+                trailInterval = setInterval(() => {
+                    createFairyTrail(fairy);
+                }, 100); // Create a trail every 100ms
+            }
+
+            function createFairyTrail(fairy) {
+                const trailImage = document.createElement('img');
+                trailImage.src = 'h.png';
+                trailImage.style.position = 'absolute';
+                const fairyRect = fairy.getBoundingClientRect();
+                trailImage.style.left = `${fairyRect.left + window.scrollX + fairyRect.width / 3}px`; // Center behind the fairy
+                trailImage.style.top = `${fairyRect.top + window.scrollY + fairyRect.height / 4}px`; // Center behind the fairy
+                trailImage.style.width = `${Math.random() * 30 + 20}px`; // Random sizes
+                trailImage.style.height = trailImage.style.width;
+                trailImage.style.opacity = '1';
+                trailImage.style.zIndex = '4'; // Ensure it is behind the fairy
+                trailImage.style.transition = 'opacity 2s ease-out, transform 2s ease-out';
+
+                document.body.appendChild(trailImage);
+
+                // Animate the trail to fade out and change scale
+                setTimeout(() => {
+                    trailImage.style.opacity = '0';
+                    trailImage.style.transform = 'scale(0.5)';
+                }, 100); // Small delay before starting the animation
+
+                // Remove the trail image after the animation is complete
+                setTimeout(() => {
+                    document.body.removeChild(trailImage);
+                }, 2100); // 2s for animation + 100ms delay
+            }
+
         });
+
     </script>
 </body>
 </html>
