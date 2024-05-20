@@ -302,7 +302,7 @@
 
                 trailInterval = setInterval(() => {
                     createFairyTrail(fairy);
-                }, 100); // Create a trail every 100ms
+                }, 200); // Create a trail every 100ms
             }
 
             function createFairyTrail(fairy) {
@@ -311,8 +311,8 @@
                 trailImage.style.position = 'absolute';
                 const fairyRect = fairy.getBoundingClientRect();
                 trailImage.style.left = `${fairyRect.left + window.scrollX + fairyRect.width / 3}px`; // Center behind the fairy
-                trailImage.style.top = `${fairyRect.top + window.scrollY + fairyRect.height / 4}px`; // Center behind the fairy
-                trailImage.style.width = `${Math.random() * 30 + 20}px`; // Random sizes
+                trailImage.style.top = `${fairyRect.top + window.scrollY + fairyRect.height / 5}px`; // Center behind the fairy
+                trailImage.style.width = `${Math.random() * 30 + 5}px`; // Random sizes
                 trailImage.style.height = trailImage.style.width;
                 trailImage.style.opacity = '1';
                 trailImage.style.zIndex = '4'; // Ensure it is behind the fairy
@@ -323,8 +323,8 @@
                 // Animate the trail to fade out and change scale
                 setTimeout(() => {
                     trailImage.style.opacity = '0';
-                    trailImage.style.transform = 'scale(0.5)';
-                }, 100); // Small delay before starting the animation
+                    trailImage.style.transform = 'scale(1) translateY(-300px)';
+                }, 50); // Small delay before starting the animation
 
                 // Remove the trail image after the animation is complete
                 setTimeout(() => {
