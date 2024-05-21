@@ -10,6 +10,7 @@
             padding: 0;
             width: 100%;
             height: 100%;
+            overflow: hidden; /* Prevent scrollbars */
             font-family: 'Courier New', Courier, monospace; /* Retro tech font */
         }
 
@@ -28,8 +29,8 @@
         }
 
         .icon img {
-            width: 64px; /* Adjusted size */
-            height: 64px; /* Adjusted size */
+            width: 64px;
+            height: 64px;
             display: block;
             margin: 0 auto;
         }
@@ -37,9 +38,9 @@
         .icon span {
             display: block;
             color: white;
-            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+            text-shadow: 0 0 1px #000, 0 0 1px #000;
             font-size: 14px;
-            margin-top: 5px; /* Move text closer to icon */
+            margin-top: 5px;
         }
 
         #recycleBinIcon {
@@ -48,7 +49,7 @@
         }
 
         #textFileIcon {
-            top: 120px; /* Adjust this value to position below recycle bin */
+            top: 120px;
             left: 30px;
         }
 
@@ -58,11 +59,11 @@
             top: 50%;
             left: 50%;
             width: 600px;
-            height: 400px;
+            height: 250px;
             border: 1px solid #000;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             background: #fff;
-            transform: translate(-50%, -50%); /* Center the window */
+            transform: translate(-50%, -50%);
         }
 
         #notepadWindow .title-bar {
@@ -70,40 +71,49 @@
             padding: 1px 10px;
             font-weight: bold;
             display: flex;
-            justify-content: space-between; /* Space out close button */
-            align-items: center; /* Align items vertically center */
+            justify-content: space-between;
+            align-items: center;
         }
 
         #notepadWindow .title-bar img {
-            width: 16px; /* Adjust icon size for title bar */
+            width: 16px;
             height: 16px;
             margin-right: 5px;
         }
 
         #notepadWindow .title-bar .title {
             display: flex;
-            align-items: center; /* Align items vertically center */
+            align-items: center;
         }
 
         #notepadWindow .title-bar .close-btn {
             cursor: pointer;
             padding: 0 10px;
-            font-size: 18px; /* Make the close button larger */
-            line-height: 1; /* Ensure the close button is vertically centered */
+            font-size: 18px;
+            line-height: 1;
         }
 
         #notepadWindow .content {
             padding: 10px;
             overflow: auto;
             height: calc(100% - 30px);
-            text-align: left; /* Ensure left-aligned text */
-            font-family: 'Courier New', Courier, monospace; /* Retro tech font */
+            text-align: left;
+            font-family: 'Courier New', Courier, monospace;
         }
 
         #notepadWindow .content pre {
-            white-space: pre-wrap; /* Ensure text wraps within the window */
-            word-wrap: break-word; /* Ensure long words break to fit within the window */
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
+
+        #notepadWindow .additional-image {
+            position: absolute;
+            top: -92px; /* Adjust as needed to position above the title bar */
+            right: 15%; /* Aligns the image to the right side of the title bar */
+            width: 100px; /* Adjust the width as needed */
+            height: auto; /* Maintains aspect ratio */
+        }
+
 
         @keyframes clickEffect {
             0%, 100% { transform: scale(1); opacity: 1; }
@@ -114,22 +124,22 @@
         @media (max-width: 768px) {
             #notepadWindow {
                 width: calc(100% - 25px);
-                height: 60vh; /* 60% of vertical space */
-                top: 50%;
+                height: auto;
+                top: 55%;
                 left: 50%;
-                transform: translate(-50%, -50%); /* Center vertically and horizontally */
+                transform: translate(-50%, -50%);
                 border: 1px solid #000;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
                 background: #fff;
             }
 
             .icon img {
-                width: 32px; /* Adjust size for mobile */
-                height: 32px; /* Adjust size for mobile */
+                width: 32px;
+                height: 32px;
             }
 
             .icon span {
-                font-size: 12px; /* Adjust font size for mobile */
+                font-size: 12px;
             }
 
             #recycleBinIcon {
@@ -142,6 +152,108 @@
                 left: 20px;
             }
         }
+
+        #fairy {
+            display: none;
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            pointer-events: none;
+            transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+            z-index: 5;
+        }
+
+        #mediaPlayer {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 220px;
+            height: auto;
+            border: 1px solid #ffffff;
+            background: #000000;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            border-radius: 16px;
+        }
+
+        .media-content {
+            display: flex;
+            flex: 1;
+        }
+
+        .media-display {
+            width: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+            padding-bottom: 7px;
+        }
+
+        .cover-image {
+            width: 100px;
+            height: auto;
+            object-fit: cover;
+            border: 0px;
+        }
+
+        .mp3-list {
+            list-style: none;
+            padding: 5px;
+            margin: 0;
+            flex: 1;
+            overflow-y: auto;
+            color: white;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center vertically */
+            align-items: center; /* Center horizontally */
+        }
+
+        .mp3-list li {
+            margin-bottom: 5px;
+            cursor: pointer;
+            
+        }
+
+        audio {
+            width: 100%;
+            height: 20px;
+            background: #ffffff;
+            color: rgb(0, 0, 0);
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        /* Add these styles for the flashing light effect */
+        .flashing-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: none;
+            z-index: 1;
+        }
+
+        @keyframes flashing {
+            0% { background-color: rgba(255, 0, 0, 0.2); }
+            25% { background-color: rgba(0, 255, 0, 0.2); }
+            50% { background-color: rgba(0, 0, 255, 0.2); }
+            75% { background-color: rgba(255, 255, 0, 0.2); }
+            100% { background-color: rgba(255, 0, 255, 0.2); }
+        }
+
+        .flashing {
+            animation: flashing 0.5s infinite;
+        }
+
+
     </style>
 </head>
 <body>
@@ -154,6 +266,21 @@
             <img src="np2.png" alt="Text File">
             <span>hey.txt</span>
         </div>
+        <div id="mediaPlayer">
+            <div class="media-content">
+                <div class="media-display">
+                    <img src="pr2.png" alt="Cover Image" class="cover-image" id="coverImage">
+                </div>
+                <ul class="mp3-list">
+                    <li data-src="pedro.mp3">pedro.mp3</li>
+                    <li data-src="süngerbob.mp3">süngerbob.mp3</li>
+                    <li data-src="pokemon.mp3">pokemon.mp3</li>
+                </ul>
+            </div>
+            <audio id="audioPlayer" controls></audio>
+            <div class="flashing-overlay" id="flashingOverlay"></div>
+        </div>
+        
         <div id="notepadWindow">
             <div class="title-bar">
                 <div class="title">
@@ -162,29 +289,193 @@
                 </div>
                 <div class="close-btn">X</div>
             </div>
+            <img src="cat.png" alt="Additional Image" class="additional-image">
             <div class="content">
                 <pre>fuck u haha
                 </pre>
             </div>
         </div>
+        <img id="fairy" src="fairy.png" alt="Fairy">
     </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
+        document.addEventListener('DOMContentLoaded', () => {
             const textFileIcon = document.getElementById('textFileIcon');
             const notepadWindow = document.getElementById('notepadWindow');
             const closeBtn = document.querySelector('.close-btn');
-            
+            const fairy = document.getElementById('fairy');
+
+            let isMirrored = false;
+
             textFileIcon.addEventListener('click', () => {
                 textFileIcon.style.animation = 'clickEffect 0.5s ease-in-out';
                 setTimeout(() => {
                     notepadWindow.style.display = 'block';
-                }, 500); // Match with the CSS animation duration
+                    const notepadRect = notepadWindow.getBoundingClientRect();
+                    const centerX = notepadRect.left + notepadRect.width / 2;
+                    const centerY = notepadRect.top + notepadRect.height / 2;
+
+                    fairy.style.display = 'block';
+                    fairy.style.transition = 'transform 3s ease-in-out, opacity 3s ease-in-out';
+                    fairy.style.transform = `translate(${centerX - 25}px, ${centerY - 25}px) scale(2)`;
+                    fairy.style.opacity = 0;
+
+                    setTimeout(() => {
+                        fairy.style.opacity = 1;
+                        bobDuringFadeIn(centerX, centerY);
+                    }, 500);
+                }, 500);
             });
 
             closeBtn.addEventListener('click', () => {
                 notepadWindow.style.display = 'none';
+                fairy.style.display = 'none';
+                clearInterval(trailInterval);
+            });
+
+            function bobDuringFadeIn(centerX, centerY) {
+                let bobbing = true;
+
+                function bob() {
+                    if (!bobbing) return;
+                    fairy.style.transition = 'transform 1s ease-in-out, opacity 3s ease-in-out';
+                    fairy.style.transform = `translate(${centerX - 25}px, ${centerY - 30}px) scale(2)`;
+                    setTimeout(() => {
+                        if (!bobbing) return;
+                        fairy.style.transform = `translate(${centerX - 25}px, ${centerY - 20}px) scale(2)`;
+                        setTimeout(bob, 1000);
+                    }, 1000);
+                }
+
+                fairy.style.opacity = 1;
+                bob();
+
+                setTimeout(() => {
+                    bobbing = false;
+                    animateFairy();
+                }, 3000);
+            }
+
+            let trailInterval;
+
+            function animateFairy() {
+                const fairyWidth = fairy.offsetWidth;
+                const fairyHeight = fairy.offsetHeight;
+
+                function moveFairy() {
+                    const maxX = window.innerWidth - fairyWidth;
+                    const maxY = window.innerHeight - fairyHeight;
+                    const minX = 0;
+                    const minY = 0;
+
+                    let posX = Math.random() * (maxX - minX) + minX;
+                    let posY = Math.random() * (maxY - minY) + minY;
+
+                    posX = Math.max(minX, Math.min(maxX, posX + Math.random() * 200 - 100));
+                    posY = Math.max(minY, Math.min(maxY, posY + Math.random() * 200 - 100));
+
+                    fairy.style.transition = 'transform 3s ease-in-out';
+                    fairy.style.transform = `translate(${posX}px, ${posY}px) scale(2) scaleX(${isMirrored ? '-1' : '1'})`;
+
+                    const pause = Math.random() * 1000 + 1000;
+                    setTimeout(() => {
+                        isMirrored = !isMirrored;
+                        fairy.style.transition = 'none';
+                        fairy.style.transform = `translate(${posX}px, ${posY}px) scale(2) scaleX(${isMirrored ? '-1' : '1'})`;
+
+                        setTimeout(() => {
+                            fairy.style.transition = 'transform 3s ease-in-out';
+                            moveFairy();
+                        }, 1000);
+                    }, 3000 + pause);
+                }
+
+                function bobFairy() {
+                    fairy.style.transition = 'transform 1s ease-in-out';
+                    fairy.style.transform += ' translateY(10px)';
+                    setTimeout(() => {
+                        fairy.style.transform += ' translateY(-10px)';
+                        setTimeout(bobFairy, 1000);
+                    }, 1000);
+                }
+
+                moveFairy();
+                bobFairy();
+
+                trailInterval = setInterval(() => {
+                    createFairyTrail(fairy);
+                }, 200);
+            }
+
+            function createFairyTrail(fairy) {
+                const trailImage = document.createElement('img');
+                trailImage.src = 'h.png';
+                trailImage.style.position = 'absolute';
+                const fairyRect = fairy.getBoundingClientRect();
+                trailImage.style.left = `${fairyRect.left + window.scrollX + fairyRect.width / 3}px`;
+                trailImage.style.top = `${fairyRect.top + window.scrollY + fairyRect.height / 5}px`;
+                trailImage.style.width = `${Math.random() * 30 + 5}px`;
+                trailImage.style.height = trailImage.style.width;
+                trailImage.style.opacity = '1';
+                trailImage.style.zIndex = '4';
+                trailImage.style.transition = 'opacity 2s ease-out, transform 2s ease-out';
+
+                document.body.appendChild(trailImage);
+
+                setTimeout(() => {
+                    trailImage.style.opacity = '0';
+                    trailImage.style.transform = 'scale(1) translateY(-200px)';
+                }, 50);
+
+                setTimeout(() => {
+                    document.body.removeChild(trailImage);
+                }, 2100);
+            }
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            const mp3ListItems = document.querySelectorAll('.mp3-list li');
+            const audioPlayer = document.getElementById('audioPlayer');
+            const coverImage = document.getElementById('coverImage');
+            const flashingOverlay = document.getElementById('flashingOverlay');
+
+            const staticImageSrc = "pr2.png"; // Static image source
+            const gifImageSrc = "pr2.gif"; // GIF image source
+
+            mp3ListItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    audioPlayer.src = item.getAttribute('data-src');
+                    audioPlayer.play();
+
+                    coverImage.src = gifImageSrc;
+
+                    // Start the flashing light effect
+                    flashingOverlay.style.display = 'block';
+                    flashingOverlay.classList.add('flashing');
+                });
+            });
+
+            audioPlayer.addEventListener('pause', () => {
+                // Stop the flashing light effect when the audio is paused
+                flashingOverlay.style.display = 'none';
+                flashingOverlay.classList.remove('flashing');
+                coverImage.src = staticImageSrc; // Revert to static image
+            });
+
+            audioPlayer.addEventListener('ended', () => {
+                // Stop the flashing light effect when the audio ends
+                flashingOverlay.style.display = 'none';
+                flashingOverlay.classList.remove('flashing');
+                coverImage.src = staticImageSrc; // Revert to static image
+            });
+
+            audioPlayer.addEventListener('play', () => {
+                // Resume the flashing light effect when the audio is played
+                flashingOverlay.style.display = 'block';
+                flashingOverlay.classList.add('flashing');
+                coverImage.src = gifImageSrc; // Switch to GIF image
             });
         });
+
     </script>
 </body>
 </html>
