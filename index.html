@@ -2,59 +2,200 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jared Robertson</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,600;1,800;1,900&family=Poppins:wght@200;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Professional Resume">
+    <title>Professional Resume</title>
+    <!-- Import Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Root Variables */
+        :root {
+            --primary: #6C8EA4; /* Muted blue-gray */
+            --background: #1A1A1A;
+            --surface: #242424;
+            --text-primary: #E0E0E0;
+            --text-secondary: #B0B0B0;
+            --spacing: 1rem;
+        }
+
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            background-color: var(--background);
+            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            max-width: 1200px;
+            margin: 4rem auto 2rem;
+            padding: 0 var(--spacing);
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            align-items: center;
+            text-align: center;
+            background: none;
+        }
+
+        .profile-photo {
+            width: 125px; /* Set width for the circle */
+            height: 125px; /* Set height for the circle */
+            border-radius: 50%; /* Makes the border circular */
+            background-color: var(--surface);
+            overflow: hidden; /* Hides any part of the image that overflows */
+            display: flex; /* Enables centering the image */
+            justify-content: center; /* Centers image horizontally */
+            align-items: center; /* Centers image vertically */
+            filter: grayscale(75%);
+        }
+
+        .profile-photo img {
+            width: 100%; /* Ensures the image fills the parent */
+            height: auto; /* Maintains the aspect ratio */
+            object-fit: cover; /* Ensures the image scales to cover the circle */
+        }
+
+
+        .profile-info h1 {
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-info p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .contact-icons {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .contact-icons a {
+            color: var(--primary);
+            font-size: 1.5rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .contact-icons a:hover {
+            color: #E0E0E0;
+            transform: scale(1.2);
+        }
+
+        /* Certifications Section Images */
+        .certification-images {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 2rem;
+            margin-top: 2rem;
+            gap: 0.1rem;
+        }
+
+        .certification-images img {
+            width: 100px;
+            height: auto;
+            filter: grayscale(75%);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing);
+        }
+
+        section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: var(--surface);
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-info h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
-<body class="light-mode">
-
-    <div class="wrapper">
-        <header>
-            <nav>
-                <ul>
-                    <li><a href="#" onclick="btnHom()">home</a></li>
-                    <li><a href="#" onclick="btnSki()">skills</a></li>
-                    <li><a href="#" onclick="btnExp()">exp/edu</a></li>
-                    <li><a href="#" onclick="btnPro()">projects</a></li>
-                    <li><a href="#" onclick="btnCon()">contact</a></li>
-                </ul>
-                <img class="light-switch light-mode" src="idea.png" onclick="lightMode()">
-            </nav>
-            
-            <script src="myScript.js"></script>
-        </header>
-
-        <main>
-            <div class="left-col">
-                <div class="pghome">
-                    <span class="intro">Hi, I'm</span><h1 class="float">Jared Robertson</h1>
-                    <p class="info"><strong>IT Professional</strong><br>with a wide skillset and a background in<span class="sales-italic">Sales & Customer Service.
-                        <br><br>This site is a work in progress.<br>Thanks for visiting!<br>🚧🚧🚧
-                    </span></p>
-                </div>
-                <div class="pgskills">
-                    SKILLS
-                </div>
-                <div class="pgexpedu">
-                    EXP/EDU
-                </div>
-                <div class="pgprojects">
-                    PROJECTS
-                </div>
-                <div class="pgcontact">
-                    CONTACT
-                </div>
+<body>
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <div class="profile-photo">
+            <img src="https://jaredsrobertson.com/wp-content/uploads/2024/11/IMG_9124-1-scaled.jpg" alt="Profile Photo">
+        </div>
+        <div class="profile-info">
+            <h1>Jared S Robertson</h1>
+            <!-- Contact Icons -->
+            <div class="contact-icons">
+                <a href="mailto:jared@jaredsrobertson.com" aria-label="Email" target="_blank" rel="noopener">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://linkedin.com/in/jaredsrobertson" aria-label="LinkedIn" target="_blank" rel="noopener">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/jaredsrobertson" aria-label="GitHub" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                </a>
             </div>
-            <div class="right-col">
-                <div class="photo-div"><img class="photo light-mode" src="headshotcolor.png" alt="A photograph of Jared Robertson."></div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Professional Summary -->
+        <section id="summary">
+            <p>
+                IT Professional with extensive customer service expertise, industry certifications, and hands-on technical experience. Combining 20 years of client relationship management with current technical skills in cybersecurity, systems administration, and IT support.
+            </p>
+        </section>
+
+        <!-- Certifications -->
+        <section id="certifications">
+            <h2>Certifications</h2>
+            <div class="certification-images">
+                <img src="https://jaredsrobertson.com/wp-content/uploads/2024/12/NetworkPlus-Logo-Certified-CE.png" alt="Certification 1">
+                <img src="https://jaredsrobertson.com/wp-content/uploads/2024/12/ProjectPlus-Logo-Certified.png" alt="Certification 2">
+                <img src="https://jaredsrobertson.com/wp-content/uploads/2024/12/Aplus-Logo-Certified-CE.png" alt="Certification 3">
+
             </div>
-        </main>
+            <ul>
+                <li>CompTIA Network+ (2024)</li>
+                <li>CompTIA A+ (2023)</li>
+                <li>Google IT Support Professional (2023)</li>
+                <li>CompTIA Project+ (2024)</li>
+                <li>LPI Linux Essentials (2024)</li>
+                <li>CompTIA Security+ (Expected November 2024)</li>
+            </ul>
+        </section>
 
-    </div>
-
+        <!-- Other sections remain unchanged -->
+    </main>
 </body>
 </html>
