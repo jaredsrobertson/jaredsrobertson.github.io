@@ -10,11 +10,11 @@
     <style>
         /* Root Variables */
         :root {
-            --primary: #6C8EA4; /* Muted blue-gray */
-            --background: #1A1A1A;
-            --surface: #242424;
-            --text-primary: #E0E0E0;
-            --text-secondary: #B0B0B0;
+            --primary: #6C8EA4; 
+            --background: #262626; 
+            --surface: #2E2E2E; 
+            --text-primary: #F0F0F0; 
+            --text-secondary: #C0C0C0; 
             --spacing: 1rem;
         }
 
@@ -32,56 +32,52 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
             scroll-behavior: smooth;
+            padding: var(--spacing);
+            min-width: 320px;
         }
 
         /* Profile Section */
         .profile-section {
             max-width: 1200px;
-            margin: 4rem auto 2rem;
-            padding: 0 var(--spacing);
+            margin: 1rem auto 2rem;
+            padding: 1rem;
             display: flex;
             justify-content: center;
             gap: 2rem;
             align-items: center;
             text-align: center;
-            background: none;
         }
 
         .profile-photo {
-            width: 125px; /* Set width for the circle */
-            height: 125px; /* Set height for the circle */
-            border-radius: 50%; /* Makes the border circular */
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
             background-color: var(--surface);
-            overflow: hidden; /* Hides any part of the image that overflows */
-            display: flex; /* Enables centering the image */
-            justify-content: center; /* Centers image horizontally */
-            align-items: center; /* Centers image vertically */
-            filter: grayscale(75%);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .profile-photo img {
-            width: 100%; /* Ensures the image fills the parent */
-            height: auto; /* Maintains the aspect ratio */
-            object-fit: cover; /* Ensures the image scales to cover the circle */
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(40%);
         }
-
 
         .profile-info h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
+            font-weight: 400;
             color: var(--text-primary);
             margin-bottom: 0.5rem;
-        }
-
-        .profile-info p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
         }
 
         .contact-icons {
             margin-top: 1rem;
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 3rem;
         }
 
         .contact-icons a {
@@ -95,34 +91,13 @@
             transform: scale(1.2);
         }
 
-        /* Certifications Section Images */
-        .certification-images {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            margin-bottom: 2rem;
-            margin-top: 2rem;
-            gap: 0.1rem;
-        }
-
-        .certification-images img {
-            width: 100px;
-            height: auto;
-            filter: grayscale(75%);
-        }
-
-        /* Main Content */
-        main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: var(--spacing);
-        }
-
+        /* Section Styling */
         section {
-            margin-bottom: 2rem;
+            margin: 2rem auto;
             padding: 1.5rem;
             background-color: var(--surface);
             border-radius: 8px;
+            max-width: 1200px;
         }
 
         h2 {
@@ -131,71 +106,193 @@
             font-size: 1.5rem;
         }
 
+        /* Skills Section */
+        .skills-section ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1rem;
+            list-style: none;
+            padding: 0;
+        }
+
+        .skills-section ul li {
+            flex: 1 1 calc(33.33% - 1rem); /* 3 columns */
+            background: var(--surface);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        /* Collapsible Certifications Section */
+        .certification-images {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .certification-images img {
+            width: 110px;
+            height: auto;
+            filter: grayscale(50%);
+            transition: filter 0.3s ease;
+        }
+
+        .certification-images img:hover {
+            filter: grayscale(0%);
+        }
+
+        .certification-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            list-style: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.5s ease;
+            opacity: 0;
+            padding: 0 1rem;
+        }
+
+        .certification-list li {
+            flex: 1 1 calc(50% - 1rem); /* 2 columns */
+            text-align: left;
+            padding: 0.5rem 1rem;
+            background: var(--surface);
+            border-radius: 4px;
+            color: var(--text-primary);
+        }
+
+        .certification-list.visible {
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        .see-more {
+            text-align: center;
+            margin-top: 1rem;
+            padding: 0.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .see-more:hover {
+            background-color: var(--primary);
+            color: var(--background);
+            border-radius: 4px;
+        }
+
         /* Responsive Adjustments */
         @media (max-width: 768px) {
+            body {
+                padding: 0.5rem;
+            }
+
             .profile-section {
                 flex-direction: column;
-                text-align: center;
+                padding: 1rem;
             }
 
             .profile-info h1 {
                 font-size: 2rem;
+            }
+
+            .certification-images img {
+                width: 50px;
+            }
+
+            .certification-images {
+                gap: 2rem;
+                padding: 0 1rem;
+            }
+
+            .skills-section ul li,
+            .certification-list li {
+                flex: 1 1 calc(50% - 1rem); /* 2 columns for small screens */
             }
         }
     </style>
 </head>
 <body>
     <!-- Profile Section -->
-    <section class="profile-section">
+    <header class="profile-section">
         <div class="profile-photo">
-            <img src="https://jaredsrobertson.com/wp-content/uploads/2024/11/IMG_9124-1-scaled.jpg" alt="Profile Photo">
+            <img src="https://jaredsrobertson.com/wp-content/uploads/2024/11/IMG_9124-1-scaled.jpg" alt="Jared Robertson Photo">
         </div>
         <div class="profile-info">
             <h1>Jared S Robertson</h1>
-            <!-- Contact Icons -->
             <div class="contact-icons">
-                <a href="mailto:jared@jaredsrobertson.com" aria-label="Email" target="_blank" rel="noopener">
+                <a href="mailto:jared@jaredsrobertson.com" aria-label="Email">
                     <i class="fas fa-envelope"></i>
                 </a>
-                <a href="https://linkedin.com/in/jaredsrobertson" aria-label="LinkedIn" target="_blank" rel="noopener">
+                <a href="https://linkedin.com/in/jaredsrobertson" aria-label="LinkedIn">
                     <i class="fab fa-linkedin"></i>
                 </a>
-                <a href="https://github.com/jaredsrobertson" aria-label="GitHub" target="_blank" rel="noopener">
+                <a href="https://github.com/jaredsrobertson" aria-label="GitHub">
                     <i class="fab fa-github"></i>
                 </a>
             </div>
         </div>
-    </section>
+    </header>
 
     <!-- Main Content -->
     <main>
         <!-- Professional Summary -->
-        <section id="summary">
+        <section>
             <p>
                 IT Professional with extensive customer service expertise, industry certifications, and hands-on technical experience. Combining 20 years of client relationship management with current technical skills in cybersecurity, systems administration, and IT support.
             </p>
         </section>
 
-        <!-- Certifications -->
-        <section id="certifications">
-            <h2>Certifications</h2>
-            <div class="certification-images">
-                <img src="https://jaredsrobertson.com/wp-content/uploads/2024/12/NetworkPlus-Logo-Certified-CE.png" alt="Certification 1">
-                <img src="https://jaredsrobertson.com/wp-content/uploads/2024/12/ProjectPlus-Logo-Certified.png" alt="Certification 2">
-                <img src="https://jaredsrobertson.com/wp-content/uploads/2024/12/Aplus-Logo-Certified-CE.png" alt="Certification 3">
-
-            </div>
+        <!-- Skills Section -->
+        <section class="skills-section">
+            <h2>Skills</h2>
             <ul>
-                <li>CompTIA Network+ (2024)</li>
-                <li>CompTIA A+ (2023)</li>
-                <li>Google IT Support Professional (2023)</li>
-                <li>CompTIA Project+ (2024)</li>
-                <li>LPI Linux Essentials (2024)</li>
-                <li>CompTIA Security+ (Expected November 2024)</li>
+                <li>Customer Service</li>
+                <li>Technical Support</li>
+                <li>Networking</li>
+                <li>Documentation</li>
+                <li>Problem Solving</li>
+                <li>Systems Administration</li>
             </ul>
         </section>
 
-        <!-- Other sections remain unchanged -->
+        <!-- Certifications Section -->
+        <section>
+            <h2>Certifications</h2>
+            <div class="certification-images">
+                <img src="https://jaredsrobertson.com/wp-content/uploads/2024/12/NetworkPlus-Logo-Certified-CE.png" alt="Network+ Certification">
+                <img src="https://jaredsrobertson.com/wp-content/uploads/2024/12/ProjectPlus-Logo-Certified.png" alt="Project+ Certification">
+                <img src="https://jaredsrobertson.com/wp-content/uploads/2024/12/Aplus-Logo-Certified-CE.png" alt="A+ Certification">
+            </div>
+            <ul class="certification-list">
+                <li>CompTIA Network+</li>
+                <li>CompTIA A+</li>
+                <li>Google IT Support Professional</li>
+                <li>CompTIA Project+</li>
+                <li>LPI Linux Essentials</li>
+                <li>CompTIA Security+</li>
+            </ul>
+            <div class="see-more">See more</div>
+        </section>
     </main>
+
+    <script>
+        // Toggle Collapsible Section
+        const seeMore = document.querySelector(".see-more");
+        const certificationList = document.querySelector(".certification-list");
+
+        seeMore.addEventListener("click", () => {
+            certificationList.classList.toggle("visible");
+        });
+    </script>
 </body>
 </html>
